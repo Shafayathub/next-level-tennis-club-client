@@ -1,10 +1,13 @@
 
 "use client";
+import { registerUser } from "@/actions/serverAction";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function RegisterPage() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -25,7 +28,10 @@ export default function RegisterPage() {
       return;
     }
     console.log("Register data:", formData);
+    const data = {...formData}
     // Handle registration logic here
+    registerUser(data);
+    router.push('/login')
   };
 
   const handleSocialRegister = (provider: string) => {

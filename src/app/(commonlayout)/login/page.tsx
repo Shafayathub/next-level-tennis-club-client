@@ -1,5 +1,6 @@
 
 "use client";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -12,15 +13,31 @@ export default function LoginPage() {
     setFormData((prev) => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Login data:", formData);
+
     // Handle authentication logic here
+    await signIn("credentials", {
+      email: formData.email,
+      password: formData.password,
+      redirect: true,
+      callbackUrl: "http://localhost:3000/profile",
+    });
   };
 
   const handleSocialLogin = (provider: string) => {
     console.log(`Logging in with ${provider}`);
-    // Implement NextAuth or other OAuth logic here
+    
+    if(provider == "github"){
+      signIn("github", {
+        callbackUrl: "http://localhost:3000/profile",
+      })
+    }
+    else if(provider=="google"){
+      signIn("google", {
+        callbackUrl: "http://localhost:3000/profile",
+      })
+    }
   };
 
   return (
@@ -83,14 +100,14 @@ export default function LoginPage() {
         {/* Social Login Buttons */}
         <div className="flex flex-col space-y-3">
           <button
-            onClick={() => handleSocialLogin("GitHub")}
+            onClick={() => handleSocialLogin("github")}
             className="flex items-center justify-center px-4 py-2 text-white bg-gray-900 rounded-lg hover:bg-gray-600"
           >
             <Image src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo" width={24} height={24} className="mr-2 rounded-full" />
             Login with GitHub
           </button>
           <button
-            onClick={() => handleSocialLogin("Google")}
+            onClick={() => handleSocialLogin("google")}
             className="flex items-center justify-center px-4 py-2 text-white bg-slate-800  rounded-lg hover:bg-slate-600"
           >
            <Image src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png" alt="GitHub Logo" width={24} height={24} className="mr-2 rounded-full" />

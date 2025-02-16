@@ -1,12 +1,14 @@
 "use client"
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { signOut } from 'next-auth/react';
 
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/members", label: "Members" },
   { href: "/members/add", label: "Add Member" },
-  { href: "/login", label: "login" },
+  // { href: "/login", label: "login" },
+  { href: "/profile", label: "profile" },
 ];
 
 const DashNavbar = () => {
@@ -27,6 +29,9 @@ const DashNavbar = () => {
           {label}
         </Link>
       ))}
+      <div>
+          <button onClick={()=>signOut()} className="bg-red-600 text-white rounded text-center px-5 py-2">Logout</button>
+      </div>
     </nav>
   );
 };
