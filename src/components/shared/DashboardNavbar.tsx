@@ -5,14 +5,15 @@ import Link from 'next/link';
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/members", label: "Members" },
+  { href: "/members/add", label: "Add Member" },
   { href: "/login", label: "login" },
 ];
 
-const Navbar = () => {
+const DashNavbar = () => {
   const pathname = usePathname();
 
   return (
-    <nav className="mb-6 flex gap-6 bg-white shadow-md p-4 rounded-lg justify-around">
+    <nav className="mb-6 flex gap-6 bg-white shadow-md p-4 rounded-lg justify-between">
       {navLinks.map(({ href, label }) => (
         <Link
           key={href}
@@ -30,5 +31,5 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default DashNavbar;
 
