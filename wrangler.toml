@@ -1,0 +1,18 @@
+name = "next_level_tennis_client"
+type = "javascript"
+
+account_id = "your_account_id"
+workers_dev = true
+
+[site]
+bucket = "./public"
+entry-point = "workers-site"
+
+[build]
+command = "npm run build"
+
+[env.production]
+name = "next_level_tennis_client_production"
+workers_dev = false
+route = "your_production_route"
+zone_id = "your_zone_id"

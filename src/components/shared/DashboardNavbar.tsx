@@ -1,18 +1,21 @@
 "use client"
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { signOut } from 'next-auth/react';
 
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/members", label: "Members" },
-  { href: "/login", label: "login" },
+  { href: "/members/add", label: "Add Member" },
+  // { href: "/login", label: "login" },
+  { href: "/profile", label: "profile" },
 ];
 
-const Navbar = () => {
+const DashNavbar = () => {
   const pathname = usePathname();
 
   return (
-    <nav className="mb-6 flex gap-6 bg-white shadow-md p-4 rounded-lg justify-around">
+    <nav className="mb-6 flex gap-6 bg-white shadow-md p-4 rounded-lg justify-between">
       {navLinks.map(({ href, label }) => (
         <Link
           key={href}
@@ -26,9 +29,12 @@ const Navbar = () => {
           {label}
         </Link>
       ))}
+      <div>
+          <button onClick={()=>signOut()} className="bg-red-600 text-white rounded text-center px-5 py-2">Logout</button>
+      </div>
     </nav>
   );
 };
 
-export default Navbar;
+export default DashNavbar;
 
