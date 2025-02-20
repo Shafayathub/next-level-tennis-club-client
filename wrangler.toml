@@ -14,5 +14,5 @@ command = "npm run build"
 [env.production]
 name = "next_level_tennis_client_production"
 workers_dev = false
-route = "your_production_route"
+route = "/"
 zone_id = "your_zone_id"
