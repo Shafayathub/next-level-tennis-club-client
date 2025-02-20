@@ -1,8 +1,13 @@
-
+import type { Metadata } from 'next'
 import { registerUser } from "@/actions/serverAction";
 import { authOptions } from "@/utils/authOptions";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: '...',
+  description: '...',
+}
 
 const profile = async() => {
     const session = await getServerSession(authOptions);

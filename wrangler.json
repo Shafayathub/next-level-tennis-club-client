@@ -1,0 +1,5 @@
+{
+  "name": "my-project",
+  "main": "src/app/worker.js",
+  "compatibility_date": "2025-01-31"
+}
